@@ -34,7 +34,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
-import {useFavoriteStore} from "../store/favorite.ts";
+import {useFavoriteStore} from "../store/favorite";
 
 const favoriteStore = useFavoriteStore()
 const route = useRoute()
