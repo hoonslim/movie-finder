@@ -11,7 +11,15 @@
             class="w-full md:w-1/3 h-auto rounded shadow"
         />
         <div>
-          <h1 class="text-2xl font-bold mb-2">{{ movie.title }}</h1>
+          <h1 class="text-2xl font-bold mb-2">{{ movie.title }}
+            <button
+                class="text-2xl"
+                @click.stop="favoriteStore.toggleFavorite(movie)"
+            >
+              <span v-if="favoriteStore.isFavorite(movie.id)">💖</span>
+              <span v-else>🤍</span>
+            </button>
+          </h1>
           <p class="text-gray-500 mb-1">개봉일: {{ movie.release_date }}</p>
           <p class="text-yellow-600 mb-3">⭐ 평점: {{ movie.vote_average }}</p>
           <p class="text-sm leading-relaxed">{{ movie.overview }}</p>
@@ -26,7 +34,9 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import {useFavoriteStore} from "../store/favorite.ts";
 
+const favoriteStore = useFavoriteStore()
 const route = useRoute()
 const movie = ref<any>(null)
 const loading = ref(true)
