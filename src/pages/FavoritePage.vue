@@ -2,10 +2,10 @@
   <div class="max-w-4xl mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">⭐ 즐겨찾기 목록</h1>
 
-    <div v-if="favorites.length === 0">아직 추가된 영화가 없습니다.</div>
+    <div v-if="favoriteStore.favorites.length === 0">아직 추가된 영화가 없습니다.</div>
     <div v-else class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <div
-          v-for="movie in favorites"
+          v-for="movie in favoriteStore.favorites"
           :key="movie.id"
           class="border rounded p-2 shadow hover:shadow-md transition cursor-pointer"
           @click="$router.push(`/movie/${movie.id}`)"
@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { useFavoriteStore } from "../store/favorite";
 
-const { favorites } = useFavoriteStore()
+const favoriteStore = useFavoriteStore()
 
 const getImageUrl = (path: string) =>
     path ?  `https://image.tmdb.org/t/p/w500${path}` : 'https://via.placeholder.com/500x750?text=No+Image'
